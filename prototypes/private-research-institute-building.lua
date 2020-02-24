@@ -1,14 +1,30 @@
 local Utils = require("utility/utils")
+local Constants = require("constants")
 
-return function(beaconBase, beaconBaseShadow)
+return function(prototypType, nameType, fixedRecipe, sourceInventorySize)
     local labEntityPrototype = Utils.DeepCopy(data.raw["lab"]["lab"])
     local beaconEntity = Utils.DeepCopy(data.raw["beacon"]["beacon"])
+
+    local beaconBase = {
+        filename = Constants.AssetModName .. "/graphics/entity/private_research_institiute_beacon_base.png",
+        width = 148,
+        height = 93,
+        shift = {0.85, 0.046875}
+    }
+    local beaconBaseShadow = {
+        filename = Constants.AssetModName .. "/graphics/entity/private_research_institiute_beacon_base_shadow.png",
+        width = 148,
+        height = 93,
+        shift = {0.85, 0.046875},
+        frame_count = 1,
+        draw_as_shadow = true
+    }
 
     data:extend(
         {
             {
                 type = "item",
-                name = "coin_generation-private_research_institute_smelter",
+                name = "coin_generation-private_research_institute_" .. nameType,
                 icons = {
                     {
                         icon = "__base__/graphics/icons/beacon.png",
@@ -25,51 +41,49 @@ return function(beaconBase, beaconBaseShadow)
                 },
                 subgroup = "production-machine",
                 order = "g[lab]z",
-                place_result = "coin_generation-private_research_institute_smelter",
+                place_result = "coin_generation-private_research_institute_" .. nameType,
                 stack_size = 10
             },
             {
                 type = "recipe",
-                name = "coin_generation-private_research_institute_smelter",
+                name = "coin_generation-private_research_institute_" .. nameType,
                 energy_required = 2,
                 ingredients = {
                     {"electronic-circuit", 10},
                     {"iron-gear-wheel", 10},
                     {"transport-belt", 4}
                 },
-                result = "coin_generation-private_research_institute_smelter",
+                result = "coin_generation-private_research_institute_" .. nameType,
                 enabled = true
             },
             {
-                type = "furnace",
-                name = "coin_generation-private_research_institute_smelter",
+                type = prototypType,
+                name = "coin_generation-private_research_institute_" .. nameType,
                 icon = "__base__/graphics/icons/electric-furnace.png",
                 icon_size = 64,
                 icon_mipmaps = 4,
+                localised_name = {"entity-name.coin_generation-private_research_institute"},
+                localised_description = {"entity-description.coin_generation-private_research_institute"},
                 flags = {"placeable-neutral", "placeable-player", "player-creation"},
-                minable = {mining_time = 0.2, result = "coin_generation-private_research_institute_smelter"},
-                max_health = 350,
+                minable = {mining_time = 0.2, result = "coin_generation-private_research_institute_" .. nameType},
+                max_health = 150,
                 corpse = "electric-furnace-remnants",
                 dying_explosion = "electric-furnace-explosion",
-                resistances = {
-                    {
-                        type = "fire",
-                        percent = 80
-                    }
-                },
                 collision_box = {{-1.2, -1.2}, {1.2, 1.2}},
                 selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
                 damaged_trigger_effect = labEntityPrototype.damaged_trigger_effect,
                 module_specification = {
                     module_slots = labEntityPrototype.module_specification.module_slots,
-                    module_info_icon_shift = {0, 0.8} --TODO: CHANGE ME
+                    module_info_icon_shift = {0, 0.8}
                 },
                 allowed_effects = {"consumption", "speed", "productivity", "pollution"},
-                crafting_categories = {"coin_generation-private_research_institute_smelting_science"},
+                crafting_categories = {"coin_generation-private_research_institute_" .. nameType .. "_science"},
+                fixed_recipe = fixedRecipe,
+                source_inventory_size = sourceInventorySize,
                 result_inventory_size = 1,
                 crafting_speed = 1,
+                return_ingredients_on_change = true,
                 energy_usage = labEntityPrototype.energy_usage,
-                source_inventory_size = 1,
                 energy_source = labEntityPrototype.energy_source,
                 vehicle_impact_sound = labEntityPrototype.vehicle_impact_sound,
                 working_sound = labEntityPrototype.working_sound,
@@ -96,13 +110,13 @@ return function(beaconBase, beaconBaseShadow)
             }
         }
     )
-    local customFurnaceEntityPrototype = data.raw["furnace"]["coin_generation-private_research_institute_smelter"]
+    local customEntityPrototype = data.raw[prototypType]["coin_generation-private_research_institute_" .. nameType]
     for _, animation in pairs(
         {
-            customFurnaceEntityPrototype.idle_animation.layers[2],
-            customFurnaceEntityPrototype.idle_animation.layers[2].hr_version,
-            customFurnaceEntityPrototype.working_visualisations[1].animation,
-            customFurnaceEntityPrototype.working_visualisations[1].animation.hr_version
+            customEntityPrototype.idle_animation.layers[2],
+            customEntityPrototype.idle_animation.layers[2].hr_version,
+            customEntityPrototype.working_visualisations[1].animation,
+            customEntityPrototype.working_visualisations[1].animation.hr_version
         }
     ) do
         animation.scale = 0.6

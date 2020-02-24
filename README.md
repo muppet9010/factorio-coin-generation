@@ -1,5 +1,5 @@
 # factorio-coin-generation
-A mod to allow multiple ways to generate coins ingame; doing private science research, killing biters and regular coin deliveries.
+A mod to allow multiple ways to generate coins ingame; doing private science research.
 
 Private research institute
 ------------
@@ -19,8 +19,15 @@ Private research institute
     - Space science pack = 80.4
 
 
-  Notes
-  ---------
+Planned Features
+------------
 
-  - Doesn't account for expensive mode.
-  - Doesn't explictily support modded science packs.
+- killing biters
+- scheduling regular coin deliveries.
+
+
+Notes
+---------
+
+- Doesn't account for expensive mode.
+- Doesn't explictily support modded science packs.

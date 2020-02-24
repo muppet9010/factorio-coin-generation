@@ -8,19 +8,20 @@ return function()
         {
             {
                 type = "recipe-category",
-                name = "coin_generation-private_research_institute_smelting_science"
+                name = "coin_generation-private_research_institute_furnace_science"
             }
         }
     )
 
     local coinItemPrototype = Utils.DeepCopy(data.raw["item"]["coin"])
     local function CreateScienceRecipe(item, coinQuantity, scienceQuantity)
+        local recipeName = "coin_generation-private_research_institute_" .. item.name
         data:extend(
             {
                 {
                     type = "recipe",
-                    name = "coin_generation-private_research_institute_" .. item.name,
-                    category = "coin_generation-private_research_institute_smelting_science",
+                    name = recipeName,
+                    category = "coin_generation-private_research_institute_furnace_science",
                     energy_required = 10 * scienceQuantity,
                     ingredients = {{item.name, scienceQuantity}},
                     result = "coin",
@@ -44,6 +45,10 @@ return function()
                 }
             }
         )
+
+        table.insert(data.raw["module"]["productivity-module"].limitation, recipeName)
+        table.insert(data.raw["module"]["productivity-module-2"].limitation, recipeName)
+        table.insert(data.raw["module"]["productivity-module-3"].limitation, recipeName)
     end
 
     --table of values for the time being - modify to be dynamic when i do the same in Prime Intergalactic Delivery mod. values taken from that mod.
@@ -57,21 +62,19 @@ return function()
         ["space-science-pack"] = 80.4
     }
 
-    local labEntityPrototype = Utils.DeepCopy(data.raw["lab"]["lab"])
-    for _, itemName in pairs(labEntityPrototype.inputs) do
+    --can use data.raw["lab"]["lab"].inputs when programatically calculated
+    for itemName, scienceValue in pairs(scienceValues) do
         local item = Utils.DeepCopy(data.raw["tool"][itemName])
-        local scienceQuantity, coinQuantity
-        local scienceValue = scienceValues[itemName] * valueDecreaseSettingMultiplier
+        local scienceQuantity
+        scienceValue = scienceValue * valueDecreaseSettingMultiplier
         if scienceValue >= 10 then
             scienceQuantity = 1
-            coinQuantity = math.floor(scienceValue)
         elseif scienceValue >= 1 then
-            scienceQuantity = Utils.RoundNumberToDecimalPlaces(100 / scienceValue, 0)
-            coinQuantity = Utils.RoundNumberToDecimalPlaces(scienceQuantity * scienceValue, 0)
+            scienceQuantity = Utils.RoundNumberToDecimalPlaces(5 / scienceValue, 0)
         elseif scienceValue < 1 then
-            scienceQuantity = Utils.RoundNumberToDecimalPlaces(10 / scienceValue, 0)
-            coinQuantity = Utils.RoundNumberToDecimalPlaces(scienceQuantity * scienceValue, 0)
+            scienceQuantity = Utils.RoundNumberToDecimalPlaces(1 / scienceValue, 0)
         end
+        local coinQuantity = Utils.RoundNumberToDecimalPlaces(scienceQuantity * scienceValue, 0)
         CreateScienceRecipe(item, coinQuantity, scienceQuantity)
     end
 end
