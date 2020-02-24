@@ -1,0 +1,13 @@
+-  Science to coin feature: Private Research Institute:
+	+ recipes to convert the sciences in the most user friendly way to coins.
+	+ a mod setting to control the "value loss" of science to coins.
+    - support a way to have very high loss rate and still get a whole number of coins out.
+    - have an addiitonal building and recipe that takes one of each science pack and gives coins for those based on the loss ratio still.
+
+- generate coins for kills:
+	- option to players when they kill biters, worms and nests.
+	- option to pay defences and other killers.
+	- Settings for if coins go to player inventories, ground at kill site, some sort of special chest at spawn. Basically options to avoid the dropping on ground annoyance.
+	- Settings for if coins go to ground at defences, ground at kill site, some sort of special chest at spawn. Basically options to avoid the dropping on ground annoyance.
+
+- put SP/regular delivery use of the delivery pod drop ship here?
