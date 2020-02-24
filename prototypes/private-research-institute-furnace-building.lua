@@ -9,13 +9,36 @@ return function(beaconBase, beaconBaseShadow)
             {
                 type = "item",
                 name = "coin_generation-private_research_institute_smelter",
-                icon = "__base__/graphics/icons/electric-furnace.png",
-                icon_size = 64,
-                icon_mipmaps = 4,
+                icons = {
+                    {
+                        icon = "__base__/graphics/icons/beacon.png",
+                        icon_size = 64,
+                        icon_mipmaps = 4
+                    },
+                    {
+                        icon = "__base__/graphics/icons/lab.png",
+                        icon_size = 64,
+                        icon_mipmaps = 4,
+                        scale = 0.4,
+                        shift = {2, -4}
+                    }
+                },
                 subgroup = "production-machine",
                 order = "g[lab]z",
                 place_result = "coin_generation-private_research_institute_smelter",
                 stack_size = 10
+            },
+            {
+                type = "recipe",
+                name = "coin_generation-private_research_institute_smelter",
+                energy_required = 2,
+                ingredients = {
+                    {"electronic-circuit", 10},
+                    {"iron-gear-wheel", 10},
+                    {"transport-belt", 4}
+                },
+                result = "coin_generation-private_research_institute_smelter",
+                enabled = true
             },
             {
                 type = "furnace",

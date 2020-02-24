@@ -1,6 +1,9 @@
 local Utils = require("utility/utils")
 
-return function(scienceQuantityPerAction, valueDecreaseSettingMultiplier)
+return function()
+    local valueDecreaseSettingRaw = settings.startup["coin_generation-private_research_institute_value_decrease_percent"].value
+    local valueDecreaseSettingMultiplier = (100 - valueDecreaseSettingRaw) / 100
+
     data:extend(
         {
             {
@@ -11,17 +14,17 @@ return function(scienceQuantityPerAction, valueDecreaseSettingMultiplier)
     )
 
     local coinItemPrototype = Utils.DeepCopy(data.raw["item"]["coin"])
-    local function CreateScienceRecipe(item, coinValue)
+    local function CreateScienceRecipe(item, coinQuantity, scienceQuantity)
         data:extend(
             {
                 {
                     type = "recipe",
                     name = "coin_generation-private_research_institute_" .. item.name,
                     category = "coin_generation-private_research_institute_smelting_science",
-                    energy_required = 10 * scienceQuantityPerAction,
-                    ingredients = {{item.name, scienceQuantityPerAction}},
+                    energy_required = 10 * scienceQuantity,
+                    ingredients = {{item.name, scienceQuantity}},
                     result = "coin",
-                    result_count = (coinValue * scienceQuantityPerAction) * valueDecreaseSettingMultiplier,
+                    result_count = coinQuantity,
                     hidden = true,
                     main_product = "",
                     icons = {
@@ -57,6 +60,18 @@ return function(scienceQuantityPerAction, valueDecreaseSettingMultiplier)
     local labEntityPrototype = Utils.DeepCopy(data.raw["lab"]["lab"])
     for _, itemName in pairs(labEntityPrototype.inputs) do
         local item = Utils.DeepCopy(data.raw["tool"][itemName])
-        CreateScienceRecipe(item, scienceValues[itemName])
+        local scienceQuantity, coinQuantity
+        local scienceValue = scienceValues[itemName] * valueDecreaseSettingMultiplier
+        if scienceValue >= 10 then
+            scienceQuantity = 1
+            coinQuantity = math.floor(scienceValue)
+        elseif scienceValue >= 1 then
+            scienceQuantity = Utils.RoundNumberToDecimalPlaces(100 / scienceValue, 0)
+            coinQuantity = Utils.RoundNumberToDecimalPlaces(scienceQuantity * scienceValue, 0)
+        elseif scienceValue < 1 then
+            scienceQuantity = Utils.RoundNumberToDecimalPlaces(10 / scienceValue, 0)
+            coinQuantity = Utils.RoundNumberToDecimalPlaces(scienceQuantity * scienceValue, 0)
+        end
+        CreateScienceRecipe(item, coinQuantity, scienceQuantity)
     end
 end

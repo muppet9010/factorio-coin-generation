@@ -2,13 +2,9 @@ local furnaceRecipes = require("prototypes/private-research-institute-furnace-re
 local furnaceBuilding = require("prototypes/private-research-institute-furnace-building")
 local Constants = require("constants")
 
-local valueDecreaseSettingRaw = settings.startup["coin_generation-private_research_institute_value_decrease_percent"].value
-if valueDecreaseSettingRaw < 0 or valueDecreaseSettingRaw >= 100 then
+if settings.startup["coin_generation-private_research_institute_type"].value == "none" then
     return
 end
-
-local valueDecreaseSettingMultiplier = (100 - valueDecreaseSettingRaw) / 100
-local scienceQuantityPerAction = 10
 
 local beaconBase = {
     filename = Constants.AssetModName .. "/graphics/entity/private_research_institiute_beacon_base.png",
@@ -25,5 +21,7 @@ local beaconBaseShadow = {
     draw_as_shadow = true
 }
 
-furnaceRecipes(scienceQuantityPerAction, valueDecreaseSettingMultiplier)
-furnaceBuilding(beaconBase, beaconBaseShadow)
+if settings.startup["coin_generation-private_research_institute_type"].value == "per_science" then
+    furnaceRecipes()
+    furnaceBuilding(beaconBase, beaconBaseShadow)
+end
