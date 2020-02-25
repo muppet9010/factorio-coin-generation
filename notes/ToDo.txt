@@ -1,8 +1,1 @@
-- generate coins for kills:
-	- option for players when they kill nests - default setting: 10 coins
-    - option for players when they kill biters, worms - base value is: (cube root of health) / 2 * setting mod (default 1)
-	- option to pay defences and non player killers - multiplier on player values.
-	- Settings for if coins go to player inventories, ground at kill site, some sort of special chest at spawn. Basically options to avoid the dropping on ground annoyance.
-	- Settings for if coins go to ground at defences, ground at kill site, some sort of special chest at spawn. Basically options to avoid the dropping on ground annoyance.
-
 - put SP/regular delivery use of the delivery pod drop ship here?
