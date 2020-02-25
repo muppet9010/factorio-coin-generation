@@ -27,16 +27,8 @@ return function(prototypType, nameType, fixedRecipe, sourceInventorySize)
                 name = "coin_generation-private_research_institute_" .. nameType,
                 icons = {
                     {
-                        icon = "__base__/graphics/icons/beacon.png",
-                        icon_size = 64,
-                        icon_mipmaps = 4
-                    },
-                    {
-                        icon = "__base__/graphics/icons/lab.png",
-                        icon_size = 64,
-                        icon_mipmaps = 4,
-                        scale = 0.4,
-                        shift = {2, -4}
+                        icon = Constants.AssetModName .. "/graphics/icon/private_research_institute.png",
+                        icon_size = 64
                     }
                 },
                 subgroup = "production-machine",

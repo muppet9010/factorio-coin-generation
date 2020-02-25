@@ -1,7 +1,7 @@
 local Utils = require("utility/utils")
 local Constants = require("constants")
 
-return function()
+return function(institudeType)
     local valueDecreaseSettingRaw = settings.startup["coin_generation-private_research_institute_value_decrease_percent"].value
     local valueDecreaseSettingMultiplier = (100 - valueDecreaseSettingRaw) / 100
 
@@ -14,6 +14,12 @@ return function()
         }
     )
 
+    local spaceIngredient, scienceValue, icon = nil, 172, Constants.AssetModName .. "/graphics/icon/grouped_science_non_space.png"
+    if institudeType == "grouped_science_with_space" then
+        spaceIngredient = {"space-science-pack", 1}
+        scienceValue = 252
+        icon = Constants.AssetModName .. "/graphics/icon/grouped_science_with_space.png"
+    end
     data:extend(
         {
             {
@@ -27,15 +33,16 @@ return function()
                     {"military-science-pack", 1},
                     {"chemical-science-pack", 1},
                     {"production-science-pack", 1},
-                    {"utility-science-pack", 1}
+                    {"utility-science-pack", 1},
+                    spaceIngredient
                 },
                 result = "coin",
-                result_count = Utils.RoundNumberToDecimalPlaces(172 * valueDecreaseSettingMultiplier, 0),
+                result_count = Utils.RoundNumberToDecimalPlaces(scienceValue * valueDecreaseSettingMultiplier, 0),
                 hidden = true,
                 main_product = "",
                 icons = {
                     {
-                        icon = Constants.AssetModName .. "/graphics/icon/grouped_science.png",
+                        icon = icon,
                         icon_size = 32
                     }
                 },

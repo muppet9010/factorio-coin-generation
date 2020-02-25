@@ -4,7 +4,7 @@ data:extend(
             name = "coin_generation-private_research_institute_type",
             type = "string-setting",
             default_value = "none",
-            allowed_values = {"none", "per_science", "grouped_science"},
+            allowed_values = {"none", "per_science", "grouped_science_non_space", "grouped_science_with_space"},
             setting_type = "startup",
             order = "1001"
         },
