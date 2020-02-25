@@ -25,6 +25,8 @@ return function(institudeType)
             {
                 type = "recipe",
                 name = "coin_generation-private_research_institute_grouped_science",
+                localised_name = {"recipe-name.coin_generation-private_research_institute_science"},
+                localised_description = {"recipe-description.coin_generation-private_research_institute_science"},
                 category = "coin_generation-private_research_institute_assembling_machine_science",
                 energy_required = 60,
                 ingredients = {

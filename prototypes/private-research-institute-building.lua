@@ -82,6 +82,7 @@ return function(prototypType, nameType, fixedRecipe, sourceInventorySize)
                 animation = {
                     layers = {
                         beaconBase,
+                        labEntityPrototype.off_animation.layers[1],
                         beaconBaseShadow
                     }
                 },
@@ -105,6 +106,7 @@ return function(prototypType, nameType, fixedRecipe, sourceInventorySize)
     local customEntityPrototype = data.raw[prototypType]["coin_generation-private_research_institute_" .. nameType]
     for _, animation in pairs(
         {
+            customEntityPrototype.animation.layers[2],
             customEntityPrototype.idle_animation.layers[2],
             customEntityPrototype.working_visualisations[1].animation
         }

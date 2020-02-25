@@ -22,6 +22,8 @@ return function()
                     type = "recipe",
                     name = recipeName,
                     category = "coin_generation-private_research_institute_furnace_science",
+                    localised_name = {"recipe-name.coin_generation-private_research_institute_science"},
+                    localised_description = {"recipe-description.coin_generation-private_research_institute_science"},
                     energy_required = 10 * scienceQuantity,
                     ingredients = {{item.name, scienceQuantity}},
                     result = "coin",

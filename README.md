@@ -21,12 +21,33 @@ Private research institute
     - Utility science pack = 37.9
     - Space science pack = 80.4
 
+Biter killing bounty
+---------------
+
+- A bounty is paid for the killing of the biters and their bases, with different values for players and turrets.
+- The biter & worm coin value is based on enemy health and scales logarithmically to slower increase with further health gain. Small biter is ~1 coin, large is ~4 and a behemoth is ~7 coins. Partial coin values are handled by chance. You can control a multiplier on this.
+- Biter nest is a static coin value.
+- Option to set turret coin value as a multiplier of player in fractions, i.e. 0.1
+- Options to set the coin delivery location for players and turrets seperately. Including in the player inventory, on the ground by the killer, by the corpse or in other modded collection points (Prime Intergalactic Delivery payment chest).
+
 
 Planned Features
 ------------
 
-- killing biters
 - scheduling regular coin deliveries.
+
+
+Muppet Coin Based Mod Collection
+------------------
+
+This mod is part of my collection of mods that use the vanilla Factorio coins. They are designed to work togeather or seperately as required. You can also mix with other peoples mods that use vanilla Factorio coins.
+
+- Prime Intergalactic Delivery: a market to buy items for coins.
+- Item Delivery Pod: a crashing spaceship that can bring items to the map with an explosive delivery.
+- Coin Generation: a mod with a variety of ways for players and streamers to generate/obtain coins.
+- Streamlabs RCON Integration: an external tool that lets streamers trigger ingame actions from Streamlabs: https://github.com/muppet9010/Streamlabs-Rcon-Integration
+
+A number of my other mods are designed for streamers or have features to make them streamer friendly.
 
 
 Notes

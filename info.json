@@ -7,7 +7,9 @@
     "homepage": "https://mods.factorio.com/mod/coin_generation",
     "factorio_version": "0.18",
     "dependencies": [
-        "base >= 0.18"
+        "base >= 0.18",
+        "? prime_intergalactic_delivery",
+        "? item_delivery_pod"
     ],
     "description": "A mod to allow multiple ways to generate coins ingame"
 }
