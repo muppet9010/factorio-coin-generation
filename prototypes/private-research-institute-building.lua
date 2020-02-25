@@ -106,12 +106,12 @@ return function(prototypType, nameType, fixedRecipe, sourceInventorySize)
     for _, animation in pairs(
         {
             customEntityPrototype.idle_animation.layers[2],
-            customEntityPrototype.idle_animation.layers[2].hr_version,
-            customEntityPrototype.working_visualisations[1].animation,
-            customEntityPrototype.working_visualisations[1].animation.hr_version
+            customEntityPrototype.working_visualisations[1].animation
         }
     ) do
         animation.scale = 0.6
         animation.shift = {0, -0.75}
+        animation.hr_version.scale = 0.3
+        animation.hr_version.shift = {0, -0.75}
     end
 end

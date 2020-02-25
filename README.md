@@ -1,10 +1,12 @@
 # factorio-coin-generation
 A mod to allow multiple ways to generate coins ingame; doing private science research.
 
+![Private research institute] (https://thumbs.gfycat.com/BaggyEarlyArabianoryx-size_restricted.gif)
+
 Private research institute
 ------------
 
-- A facility that takes in science packs and does private research (proccess) to produce coins. This facility is approximately equal to a science lab in terms of per science pack processing times and module options.
+- A facility that takes in science packs and does private research (proccess) to produce coins. This facility is approximately equal to a science lab in terms of per science pack processing times, module options and cost.
 - 2 processing types for private research of science packs:
     - Per science pack: a seperate recipe for each science pack giving the packs value in coins. Recipe ingredient quantity and processing times are generated to ensure a fair coin value, rather than allowing heavy skewing due to rounding.
     - Grouped science pack (non space): a recipe requiring 1 of each science pack below space science.
