@@ -1,0 +1,1 @@
+- put SP/regular delivery of coins and include use of the item delivery pod ship. At present started this, but not convinced about how to do it.
