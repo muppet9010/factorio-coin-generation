@@ -53,7 +53,10 @@ BiterKilling.OnEntityDiedTypeUnitTurretUnitSpawnerFilter = function(event)
         return
     end
 
-    if killer ~= nil and (killer.type == "character" or killer.type == "car") then
+    if killer ~= nil and killer.type == "character" then
+        isPlayer = true
+        coinValue = Utils.HandleFloatNumberAsChancedValue(global.biterKilling.entityValuePlayer[diedEntity.name])
+    elseif killer ~= nil and killer.type == "car" then
         if killer.get_driver() ~= nil then
             killer = killer.get_driver()
         end
