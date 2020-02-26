@@ -64,8 +64,89 @@ data:extend(
         }
     }
 )
-
 if mods["prime_intergalactic_delivery"] then
     table.insert(data.raw["string-setting"]["coin_generaton-player_coin_collection_method"].allowed_values, "prime_intergalactic_delivery_payment_chest")
     table.insert(data.raw["string-setting"]["coin_generaton-non_player_coin_collection_method"].allowed_values, "prime_intergalactic_delivery_payment_chest")
 end
+
+--IM NOT CONVINCED ABOUT THIS
+--[[
+data:extend(
+    {
+        {
+            name = "coin_generaton-coin_delivery_recipient",
+            type = "string-setting",
+            default_value = "per_player",
+            allowed_values = {"each_player", "random_player"},
+            setting_type = "runtime-global",
+            order = "3001"
+        },
+        {
+            name = "coin_generaton-coin_delivery_method",
+            type = "string-setting",
+            default_value = "inventory",
+            allowed_values = {"inventory"},
+            setting_type = "runtime-global",
+            order = "3002"
+        },
+        {
+            name = "coin_generaton-coin_delivery_time_min",
+            type = "float-setting",
+            default_value = 5,
+            minimum_value = 1,
+            setting_type = "runtime-global",
+            order = "3003"
+        },
+        {
+            name = "coin_generaton-coin_delivery_time_max",
+            type = "float-setting",
+            default_value = 30,
+            minimum_value = 1,
+            setting_type = "runtime-global",
+            order = "3004"
+        },
+        {
+            name = "coin_generaton-coin_delivery_coin_min",
+            type = "int-setting",
+            default_value = 100,
+            minimum_value = 0,
+            setting_type = "runtime-global",
+            order = "3003"
+        },
+        {
+            name = "coin_generaton-coin_delivery_coin_max",
+            type = "int-setting",
+            default_value = 1000,
+            minimum_value = 0,
+            setting_type = "runtime-global",
+            order = "3004"
+        }
+    }
+)
+if mods["prime_intergalactic_delivery"] then
+    table.insert(data.raw["string-setting"]["coin_generaton-coin_delivery_recipient"].allowed_values, "prime_intergalactic_delivery_payment_chest")
+end
+if mods["item_delivery_pod"] then
+    table.insert(data.raw["string-setting"]["coin_generaton-coin_delivery_method"].allowed_values, "item_delivery_pod_ship")
+    data:extend(
+        {
+            {
+                name = "coin_generaton-coin_delivery_item_delivery_pod_ship_size_weight",
+                type = "float-setting",
+                default_value = 1,
+                minimum_value = 0,
+                setting_type = "runtime-global",
+                order = "3010"
+            },
+            {
+                name = "coin_generaton-coin_delivery_item_delivery_pod_ship_accuracy_weight",
+                type = "float-setting",
+                default_value = 1,
+                minimum_value = 0,
+                setting_type = "runtime-global",
+                order = "3011"
+            }
+        }
+    )
+end
+]]

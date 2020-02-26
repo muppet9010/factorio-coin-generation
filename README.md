@@ -34,7 +34,7 @@ Biter killing bounty
 Planned Features
 ------------
 
-- scheduling regular coin deliveries.
+- Scheduling regular coin deliveries and optionally use the item delivery pod mod. Started but doesn't feel right options wise so put on hold and hidden in mod.
 
 
 Muppet Coin Based Mod Collection
