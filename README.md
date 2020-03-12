@@ -25,6 +25,7 @@ Biter killing bounty
 ---------------
 
 - A bounty is paid for the killing of the biters and their bases, with different values for players and turrets.
+- To disable the feature set the nest value and multipliers all to 0. To use the feature have one or more settings at a non 0 value.
 - The biter & worm coin value is based on enemy health and scales logarithmically to slower increase with further health gain. Small biter is ~1 coin, large is ~4 and a behemoth is ~7 coins. Partial coin values are handled by chance. You can control a multiplier on this.
 - Biter nest is a static coin value.
 - Option to set turret coin value as a multiplier of player in fractions, i.e. 0.1

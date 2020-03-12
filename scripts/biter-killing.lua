@@ -45,6 +45,10 @@ BiterKilling.OnSettingChanged = function(event)
 end
 
 BiterKilling.OnEntityDiedTypeUnitTurretUnitSpawnerFilter = function(event)
+    if global.biterKilling.playerNestValue == 0 and global.biterKilling.playerUnitValueMultiplier == 0 and global.biterKilling.nonPlayerCoinMultiplier == 0 then
+        return
+    end
+
     local killer = event.cause
     local diedEntity = event.entity
     local isPlayer, coinValue
