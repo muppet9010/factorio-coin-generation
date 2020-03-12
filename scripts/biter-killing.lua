@@ -45,6 +45,10 @@ BiterKilling.OnSettingChanged = function(event)
 end
 
 BiterKilling.OnEntityDiedTypeUnitTurretUnitSpawnerFilter = function(event)
+    if global.biterKilling.playerNestValue == 0 and global.biterKilling.playerUnitValueMultiplier == 0 and global.biterKilling.nonPlayerCoinMultiplier == 0 then
+        return
+    end
+
     local killer = event.cause
     local diedEntity = event.entity
     local isPlayer, coinValue
@@ -72,6 +76,10 @@ BiterKilling.OnEntityDiedTypeUnitTurretUnitSpawnerFilter = function(event)
 
     if isPlayer then
         if global.biterKilling.playerCoinMode == "inventory" then
+            if killer == nil then
+                diedEntity.surface.spill_item_stack(diedEntity.position, {name = "coin", count = coinValue}, true, nil, false)
+                return
+            end
             local inserted = killer.insert({name = "coin", count = coinValue})
             if inserted < coinValue then
                 killer.surface.spill_item_stack(killer.position, {name = "coin", counr = coinValue - inserted}, true, nil, false)
@@ -80,26 +88,40 @@ BiterKilling.OnEntityDiedTypeUnitTurretUnitSpawnerFilter = function(event)
             diedEntity.surface.spill_item_stack(diedEntity.position, {name = "coin", count = coinValue}, true, nil, false)
         elseif global.biterKilling.playerCoinMode == "prime_intergalactic_delivery_payment_chest" then
             local paymentChest = remote.call("prime_intergalactic_delivery", "get_payment_chest")
+            if paymentChest == nil then
+                Logging.LogPrint("Error: Coin Generation - give coins for kills can't get payment chest.")
+                return
+            end
             local inserted = paymentChest.insert({name = "coin", count = coinValue})
             if inserted < coinValue then
-                killer.surface.spill_item_stack(paymentChest.position, {name = "coin", count = coinValue - inserted}, true, nil, false)
+                paymentChest.surface.spill_item_stack(paymentChest.position, {name = "coin", count = coinValue - inserted}, true, nil, false)
             end
         else
-            Logging.LogPrint("Error: BiterKilling.OnEntityDiedTypeUnitTurretUnitSpawnerFilter invalid playerCoinMode: " .. global.biterKilling.playerCoinMode)
+            Logging.LogPrint("Error: Coin Generation - give coins for kills has invalid playerCoinMode: " .. global.biterKilling.playerCoinMode)
+            return
         end
     else
         if global.biterKilling.nonPlayerCoinMode == "killer" then
+            if killer == nil then
+                diedEntity.surface.spill_item_stack(diedEntity.position, {name = "coin", count = coinValue}, true, nil, false)
+                return
+            end
             killer.surface.spill_item_stack(killer.position, {name = "coin", count = coinValue}, true, nil, true)
         elseif global.biterKilling.nonPlayerCoinMode == "corpse" then
             diedEntity.surface.spill_item_stack(diedEntity.position, {name = "coin", count = coinValue}, true, nil, false)
         elseif global.biterKilling.nonPlayerCoinMode == "prime_intergalactic_delivery_payment_chest" then
             local paymentChest = remote.call("prime_intergalactic_delivery", "get_payment_chest")
+            if paymentChest == nil then
+                Logging.LogPrint("Error: Coin Generation - give coins for kills can't get payment chest.")
+                return
+            end
             local inserted = paymentChest.insert({name = "coin", count = coinValue})
             if inserted < coinValue then
-                killer.surface.spill_item_stack(paymentChest.position, {name = "coin", count = coinValue - inserted}, true, nil, false)
+                paymentChest.surface.spill_item_stack(paymentChest.position, {name = "coin", count = coinValue - inserted}, true, nil, false)
             end
         else
-            Logging.LogPrint("Error: BiterKilling.OnEntityDiedTypeUnitTurretUnitSpawnerFilter invalid nonPlayerCoinMode: " .. global.biterKilling.nonPlayerCoinMode)
+            Logging.LogPrint("Error: Coin Generation - give coins for kills has invalid nonPlayerCoinMode: " .. global.biterKilling.nonPlayerCoinMode)
+            return
         end
     end
 end

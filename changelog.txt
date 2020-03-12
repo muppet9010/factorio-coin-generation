@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 18.0.1
+Date: 2020-03-12
+  Features:
+  Changes:
+  Bugfixes:
+    - fixed reported crash if biters killed with no known "killer". In this case coins are dropped on floor.
+    - fixed possible crash if Prime Intergalactic delivery mod failed to return a payment chest for some reason.
+  Info:
+    - clarified readme and mod setting descriptions around disabling features and default/recommended values.
+---------------------------------------------------------------------------------------------------
 Version: 18.0.0
 Date: 2020-02-26
   Features:
