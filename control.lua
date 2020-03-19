@@ -24,5 +24,3 @@ script.on_init(OnStartup)
 script.on_configuration_changed(OnStartup)
 script.on_event(defines.events.on_runtime_mod_setting_changed, OnSettingChanged)
 script.on_load(OnLoad)
-
-Events.RegisterEvent(defines.events.on_entity_died, "TypeUnit-TypeTurret-TypeUnitSpawner", {{filter = "type", type = "unit"}, {filter = "type", type = "turret"}, {filter = "type", type = "unit-spawner"}})
