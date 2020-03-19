@@ -15,7 +15,8 @@ BiterKilling.CreateGlobals = function()
 end
 
 BiterKilling.OnLoad = function()
-    Events.RegisterHandler(defines.events.on_entity_died, "BiterKilling.OnEntityDiedTyOnEntityDiedTypeUnitTurretUnitSpawnerFilterpeUnitAndTypeTurretFilter", BiterKilling.OnEntityDiedTypeUnitTurretUnitSpawnerFilter, "TypeUnit-TypeTurret-TypeUnitSpawner")
+    Events.RegisterEvent(defines.events.on_entity_died, {{filter = "type", type = "unit"}, {filter = "type", type = "turret"}, {filter = "type", type = "unit-spawner"}})
+    Events.RegisterHandler(defines.events.on_entity_died, "BiterKilling.OnEntityDied", BiterKilling.OnEntityDied)
 end
 
 BiterKilling.OnSettingChanged = function(event)
@@ -44,7 +45,7 @@ BiterKilling.OnSettingChanged = function(event)
     end
 end
 
-BiterKilling.OnEntityDiedTypeUnitTurretUnitSpawnerFilter = function(event)
+BiterKilling.OnEntityDied = function(event)
     if global.biterKilling.playerNestValue == 0 and global.biterKilling.playerUnitValueMultiplier == 0 and global.biterKilling.nonPlayerCoinMultiplier == 0 then
         return
     end
@@ -54,6 +55,13 @@ BiterKilling.OnEntityDiedTypeUnitTurretUnitSpawnerFilter = function(event)
     local isPlayer, coinValue
 
     if diedEntity.force == "player" then
+        return
+    end
+    if diedEntity.type ~= "unit" and diedEntity.type ~= "turret" and diedEntity.type ~= "unit-spawner" then
+        return
+    end
+    if string.sub(diedEntity.name, 1, string.len("mining-drone-attack-proxy-new")) == "mining-drone-attack-proxy-new" then
+        --Is a mining drone attack proxy thats died.
         return
     end
 
