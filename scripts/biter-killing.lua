@@ -56,6 +56,10 @@ BiterKilling.OnEntityDiedTypeUnitTurretUnitSpawnerFilter = function(event)
     if diedEntity.force == "player" then
         return
     end
+    if string.sub(diedEntity.name, 1, string.len("mining-drone-attack-proxy-new")) == "mining-drone-attack-proxy-new" then
+        --Is a mining drone attack proxy thats died.
+        return
+    end
 
     if killer ~= nil and killer.type == "character" then
         isPlayer = true
