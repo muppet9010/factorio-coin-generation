@@ -1,4 +1,3 @@
-local Utils = require("utility/utils")
 --local Logging = require("utility/logging")
 
 local Events = {}
