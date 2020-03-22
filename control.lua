@@ -1,4 +1,3 @@
-local Events = require("utility/events")
 local BiterKilling = require("scripts/biter-killing")
 
 local function CreateGlobals()

@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 18.0.3
+Date: 2020-03-22
+  Features:
+  Changes:
+  Bugfixes:
+    - Fix event registration issue that causes mod mismatch/unsafe save/load warnings on cross mod versions between save and playing.
+  Info:
+---------------------------------------------------------------------------------------------------
 Version: 18.0.2
 Date: 2020-03-19
   Features:
