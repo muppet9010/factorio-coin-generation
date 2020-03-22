@@ -15,7 +15,7 @@ BiterKilling.CreateGlobals = function()
 end
 
 BiterKilling.OnLoad = function()
-    Events.RegisterEvent(defines.events.on_entity_died, {{filter = "type", type = "unit"}, {filter = "type", type = "turret"}, {filter = "type", type = "unit-spawner"}})
+    Events.RegisterEvent(defines.events.on_entity_died, "BiterKilling.OnEntityDied", {{filter = "type", type = "unit"}, {filter = "type", type = "turret"}, {filter = "type", type = "unit-spawner"}})
     Events.RegisterHandler(defines.events.on_entity_died, "BiterKilling.OnEntityDied", BiterKilling.OnEntityDied)
 end
 
